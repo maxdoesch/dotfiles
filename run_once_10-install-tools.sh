@@ -22,6 +22,9 @@ if command -v apt-get >/dev/null 2>&1; then
   $SUDO apt-get install -y git curl zsh build-essential npm
 fi
 
+# zoxide install
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
 # set zsh default (be robust if $SHELL is unset and if chsh doesn't exist)
 if command -v zsh >/dev/null 2>&1 && [ "${SHELL:-}" != "$(command -v zsh)" ]; then
   if command -v chsh >/dev/null 2>&1; then
