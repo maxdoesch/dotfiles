@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  echo "Installing oh-my-zsh..."
-  RUNZSH=no CHSH=no \
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Install basic packages (Debian/Ubuntu example)
+if command -v apt-get >/dev/null 2>&1; then
+  sudo apt-get update
+  sudo apt-get install -y \
+    git \
+    curl \
+    zsh \
+    neovim \
+    build-essential \
+    npm
+fi
+
+
+# ensure zsh is default shell
+if command -v zsh >/dev/null 2>&1; then
+  if [ "$SHELL" != "$(command -v zsh)" ]; then
+    chsh -s "$(command -v zsh)" "$USER" || true
+  fi
 fi
 
