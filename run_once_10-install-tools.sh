@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# figure out which user to operate on, even if $USER is unset
+# if run via sudo: prefer the original user, else fall back to id -un
+: "${USER:=$(id -un)}"
+TARGET_USER="${SUDO_USER:-$USER}"
+
 # sudo or root
 if [ "$(id -u)" -eq 0 ]; then
   SUDO=""
@@ -17,9 +22,11 @@ if command -v apt-get >/dev/null 2>&1; then
   $SUDO apt-get install -y git curl zsh build-essential npm
 fi
 
-# set zsh default
-if command -v zsh >/dev/null 2>&1 && [ "$SHELL" != "$(command -v zsh)" ]; then
-  $SUDO chsh -s "$(command -v zsh)" "$USER" || true
+# set zsh default (be robust if $SHELL is unset and if chsh doesn't exist)
+if command -v zsh >/dev/null 2>&1 && [ "${SHELL:-}" != "$(command -v zsh)" ]; then
+  if command -v chsh >/dev/null 2>&1; then
+    $SUDO chsh -s "$(command -v zsh)" "$TARGET_USER" || true
+  fi
 fi
 
 # Neovim from prebuilt archive
@@ -38,3 +45,4 @@ if [ ! -d "$HOME/.fzf" ]; then
   git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
   yes | "$HOME/.fzf/install" --no-update-rc
 fi
+
