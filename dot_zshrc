@@ -76,6 +76,7 @@ plugins=(
     git
     fzf
     chezmoi
+    uv
 )
 
 source $ZSH/oh-my-zsh.sh
