@@ -33,15 +33,9 @@ if command -v zsh >/dev/null 2>&1 && [ "${SHELL:-}" != "$(command -v zsh)" ]; th
 fi
 
 # Neovim from prebuilt archive
-NVIM_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
-INSTALL_DIR="/usr/local/nvim"
-TMP="$(mktemp)"
-
-curl -L "$NVIM_URL" -o "$TMP"
-$SUDO rm -rf "$INSTALL_DIR"
-$SUDO mkdir -p "$INSTALL_DIR"
-$SUDO tar -xzf "$TMP" -C "$INSTALL_DIR" --strip-components=1
-rm "$TMP"
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+$SUDO rm -rf /opt/nvim-linux-x86_64
+$SUDO tar -C /opt -xzf nvim-linux-x86_64.tar.gz
 
 # fzf install
 if [ ! -d "$HOME/.fzf" ]; then
