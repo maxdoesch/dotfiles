@@ -42,3 +42,10 @@ if ! command -v uv >/dev/null 2>&1; then
   echo "Installing uv..."
   curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
+
+# zellij install
+if ! command -v zellij >/dev/null 2>&1; then
+  echo "Installing zellij..."
+  curl -sSfL https://get.zellij.dev | sh
+fi
+
