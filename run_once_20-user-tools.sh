@@ -55,7 +55,7 @@ if ! command -v zellij >/dev/null 2>&1; then
 fi
 
 # FiraCode Nerd Font install
-if ! fc-match "FiraCode Nerd Font" >/dev/null 2>&1; then
+if ! ls "$HOME/.local/share/fonts"/FiraCode* >/dev/null 2>&1; then
   echo "Installing FiraCode Nerd Font..."
   tmpdir="$(mktemp -d)"
   curl -fsSL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip -o "$tmpdir/FiraCode.zip"
