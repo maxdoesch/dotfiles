@@ -46,6 +46,11 @@ fi
 # zellij install
 if ! command -v zellij >/dev/null 2>&1; then
   echo "Installing zellij..."
-  curl -sSfL https://get.zellij.dev | sh
+  curl -fsSL https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz -o /tmp/zellij.tar.gz
+  tar -xzf /tmp/zellij.tar.gz -C /tmp
+  chmod +x /tmp/zellij
+  mkdir -p "$HOME/.local/bin"
+  mv /tmp/zellij "$HOME/.local/bin/"
+  rm -f /tmp/zellij.tar.gz
 fi
 

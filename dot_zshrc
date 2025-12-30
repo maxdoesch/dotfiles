@@ -93,6 +93,8 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 unsetopt BEEP
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # =======================
 
 # User configuration
@@ -143,6 +145,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
