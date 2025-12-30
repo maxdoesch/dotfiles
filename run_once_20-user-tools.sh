@@ -54,3 +54,12 @@ if ! command -v zellij >/dev/null 2>&1; then
   rm -f /tmp/zellij.tar.gz
 fi
 
+# FiraCode Nerd Font install
+if ! fc-match "FiraCode Nerd Font" >/dev/null 2>&1; then
+  echo "Installing FiraCode Nerd Font..."
+  tmpdir="$(mktemp -d)"
+  curl -fsSL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip -o "$tmpdir/FiraCode.zip"
+  unzip -q "$tmpdir/FiraCode.zip" -d "$HOME/.local/share/fonts"
+  fc-cache -f >/dev/null 2>&1
+  rm -rf "$tmpdir"
+fi
